@@ -1,0 +1,475 @@
+:root {
+  /* =========================
+  Colors
+  ========================= */
+  --bg: #f7f6f2;
+  --surface: #f9f8f5;
+  --surface2: #fbfbf9;
+  --surface3: #f3f0ec;
+
+  --text: #28251d;
+  --muted: #6f6d68;
+  --faint: #9a9893;
+
+  --primary: #01696f;
+  --primary2: #0c4e54;
+  --primary3: #0f3638;
+  --primarySoft: #cedcd8;
+
+  --success: #437a22;
+  --error: #a12c7b;
+
+  --border: #d4d1ca;
+
+  /* =========================
+  Shadows
+  ========================= */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.09);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.14);
+
+  /* =========================
+  Radius
+  ========================= */
+  --radius-sm: .375rem;
+  --radius-md: .5rem;
+  --radius-lg: .75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* =========================
+  Layout
+  ========================= */
+  --max: 1180px;
+
+  /* =========================
+  Fonts
+  ========================= */
+  --font-display: Georgia, serif;
+  --font-body: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* =========================
+Base Reset
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+/* --- Changed body: flex layout so footer stays at bottom on all screens --- */
+body {
+  margin: 0;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: var(--font-body);
+  font-size: clamp(1rem, .95rem + .25vw, 1.06rem);
+  line-height: 1.65;
+
+  color: var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(1, 105, 111, .08), transparent 28%),
+    var(--bg);
+
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Make main grow so footer is pushed down --- */
+main {
+  flex: 1;
+}
+
+/* =========================
+Dark Theme
+========================= */
+body[data-theme='dark'] {
+  --bg: #171614;
+  --surface: #1c1b19;
+  --surface2: #201f1d;
+  --surface3: #22211f;
+
+  --text: #e4e2de;
+  --muted: #aba8a1;
+  --faint: #7c7973;
+
+  --primary: #4f98a3;
+  --primary2: #68b4bf;
+  --primary3: #1a626b;
+  --primarySoft: #313b3b;
+
+  --border: #393836;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+Global Elements
+========================= */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+Layout Helpers
+========================= */
+.container {
+  width: min(calc(100% - 2rem), var(--max));
+  margin: auto;
+}
+
+/* =========================
+Accessibility
+========================= */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+
+  background: var(--primary);
+  color: #fff;
+
+  padding: .75rem 1rem;
+  border-radius: var(--radius-md);
+  z-index: 999;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* =========================
+Header / Navigation
+========================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  backdrop-filter: blur(14px);
+  background: color-mix(in oklab, var(--bg) 86%, transparent);
+
+  border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 1rem 0;
+  position: relative;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.brand-mark {
+  width: 2.4rem;
+  height: 2.4rem;
+
+  border-radius: 50%;
+  padding: .35rem;
+
+  color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 10%, var(--surface));
+
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--primary) 18%, transparent);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+}
+
+/* =========================
+Buttons
+========================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+  padding: .9rem 1.2rem;
+
+  border-radius: 9999px;
+  font-weight: 700;
+
+  border: 1px solid transparent;
+  transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background: var(--primary2);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border-color: color-mix(in oklab, var(--text) 10%, transparent);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  background: var(--surface3);
+}
+
+/* =========================
+Typography Components
+========================= */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+
+  padding: .35rem .75rem;
+
+  border-radius: 9999px;
+
+  background: color-mix(in oklab, var(--primary) 10%, var(--surface));
+  color: var(--primary);
+
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* =========================
+Sections
+========================= */
+.hero,
+.section {
+  padding: clamp(3rem, 6vw, 5rem) 0;
+}
+
+/* =========================
+Grids
+========================= */
+.hero-grid,
+.split {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.hero-grid {
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+}
+
+.split {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* =========================
+Cards / Panels
+========================= */
+.card,
+.panel {
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
+
+  border-radius: var(--radius-2xl);
+  padding: clamp(1.15rem, 2vw, 1.5rem);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.card h2,
+.panel h1 {
+  font-family: var(--font-display);
+}
+
+/* =========================
+Hero
+========================= */
+.hero h1 {
+  font-size: clamp(3rem, 1rem + 7vw, 5.8rem);
+  max-width: 11ch;
+  margin: .9rem 0 .75rem;
+}
+
+.hero p {
+  font-size: clamp(1.05rem, .95rem + .5vw, 1.25rem);
+  max-width: 56ch;
+}
+
+/* =========================
+Metrics
+========================= */
+.metric {
+  min-width: 10.5rem;
+  padding: 1rem;
+
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
+}
+
+/* =========================
+Forms
+========================= */
+.field {
+  display: grid;
+  gap: .45rem;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 48px;
+
+  padding: .85rem 1rem;
+
+  border-radius: 12px;
+  border: 1px solid var(--border);
+
+  background: var(--surface2);
+  color: inherit;
+}
+
+.error-message {
+  min-height: 1rem;
+  color: var(--error);
+  font-size: .85rem;
+}
+
+/* =========================
+Results
+========================= */
+.result {
+  margin-top: 1rem;
+  padding: 1rem;
+
+  border-radius: 14px;
+
+  background: color-mix(in oklab, var(--primary) 9%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--primary) 18%, transparent);
+}
+
+/* =========================
+Map Placeholder
+========================= */
+.map-card {
+  min-height: 20rem;
+
+  border-radius: var(--radius-2xl);
+
+  background:
+    linear-gradient(120deg, color-mix(in oklab, var(--primary) 18%, transparent), transparent),
+    repeating-linear-gradient(45deg,
+      color-mix(in oklab, var(--text) 5%, transparent),
+      color-mix(in oklab, var(--text) 5%, transparent) 1px,
+      transparent 1px,
+      transparent 20px),
+    var(--surface3);
+}
+
+/* =========================
+Footer
+========================= */
+/* Footer sticks at bottom on all screens, same style */
+.footer {
+  padding: 1.5rem 0;
+  border-top: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
+  color: var(--muted);
+  margin-top: auto;
+}
+
+/* =========================
+Animations
+========================= */
+.fade {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.fade.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* =========================
+Responsive
+========================= */
+@media (max-width: 960px) {
+  .hero-grid,
+  .split {
+    grid-template-columns: 1fr;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: min(calc(100% - 1.2rem), var(--max));
+  }
+}
+
+/* =========================
+Reduced Motion
+========================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

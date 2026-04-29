@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WanderLux Travel Agency | Contact</title>
+
+    <meta name="description"
+          content="WanderLux Travel Agency offers personalised travel planning, guided tours, custom packages, and trip cost estimates.">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Skip Link -->
+    <a class="skip-link" href="#main"></a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container nav">
+
+            <!-- Brand -->
+            <a class="brand" href="index.html">
+                <svg class="brand-mark" viewBox="0 0 64 64" fill="none"
+                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+                    <circle cx="32" cy="32" r="28"
+                            stroke="currentColor" stroke-width="2.5" />
+
+                    <path d="M18 40C25 28 30 22 33 22C36 22 39 27 46 40"
+                          stroke="currentColor" stroke-width="3"
+                          stroke-linecap="round" />
+
+                    <path d="M23 36C27 31 30 29 32 29C34 29 38 31 41 36"
+                          stroke="currentColor" stroke-width="2.5"
+                          stroke-linecap="round" />
+
+                    <path d="M28 18L32 12L36 18"
+                          stroke="currentColor" stroke-width="2.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round" />
+                </svg>
+
+                <span>WanderLux</span>
+            </a>
+
+            <!-- Navigation -->
+            <nav aria-label="Primary navigation">
+
+                <div class="nav-links" id="main-nav" data-menu>
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="calculator.html">Calculator</a>
+                    <a href="appointment.html">Appointment</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+
+            </nav>
+
+            <!-- Theme Toggle -->
+            <div class="nav-actions">
+                <button class="btn btn-secondary theme-toggle"
+                        data-theme-toggle
+                        aria-label="Switch to dark mode">
+                    🌙
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main">
+
+        <section class="section">
+            <div class="container grid split">
+
+                <!-- Contact Info + Form -->
+                <div class="panel fade">
+
+                    <span class="eyebrow">Contact</span>
+
+                    <h1>Contact details and general enquiry form.</h1>
+
+                    <p class="muted">
+                        Level 4, Collins Street, Melbourne VIC 3000<br>
+                        +61 3 9000 1234<br>
+                        hello@wanderluxtravel.com
+                    </p>
+
+                    <!-- Contact Form -->
+                    <form id="contact-form"
+                          method="POST"
+                          action="https://formspree.io/f/mojraqbz"
+                          novalidate>
+
+                        <!-- Hidden fields -->
+                        <input type="hidden" name="_subject" value="WanderLux General Enquiry">
+                        <input type="hidden" name="_next" value="https://your-live-site-url/contact.html">
+                        <input type="text" name="_gotcha" style="display:none">
+
+                        <!-- Name + Email -->
+                        <div class="field-grid">
+
+                            <div class="field">
+                                <label for="contact-name">Name</label>
+                                <input id="contact-name"
+                                       name="name"
+                                       data-error-key="contact-name"
+                                       required>
+
+                                <span class="error-message"
+                                      data-error-key="contact-name"></span>
+                            </div>
+
+                            <div class="field">
+                                <label for="contact-email">Email</label>
+                                <input id="contact-email"
+                                       name="email"
+                                       type="email"
+                                       data-error-key="contact-email"
+                                       required>
+
+                                <span class="error-message"
+                                      data-error-key="contact-email"></span>
+                            </div>
+
+                        </div>
+
+                        <!-- Message -->
+                        <div class="field">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message"
+                                      name="message"
+                                      data-error-key="contact-message"
+                                      required></textarea>
+
+                            <span class="error-message"
+                                  data-error-key="contact-message"></span>
+                        </div>
+
+                        <!-- Submit -->
+                        <button class="btn btn-primary" type="submit">
+                            Send enquiry
+                        </button>
+
+                        <p id="contact-status"
+                           class="muted"
+                           aria-live="polite"></p>
+
+                    </form>
+
+                </div>
+
+                <!-- Map Placeholder -->
+                <div class="map-card fade"
+                     aria-label="Map placeholder">
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            WanderLux Travel Agency — ICT502 Assessment 2.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
