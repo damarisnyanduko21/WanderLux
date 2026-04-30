@@ -1,7 +1,7 @@
+/* =========================
+   ROOT VARIABLES
+========================= */
 :root {
-  /* =========================
-  Colors
-  ========================= */
   --bg: #f7f6f2;
   --surface: #f9f8f5;
   --surface2: #fbfbf9;
@@ -21,16 +21,10 @@
 
   --border: #d4d1ca;
 
-  /* =========================
-  Shadows
-  ========================= */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.09);
   --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.14);
 
-  /* =========================
-  Radius
-  ========================= */
   --radius-sm: .375rem;
   --radius-md: .5rem;
   --radius-lg: .75rem;
@@ -38,20 +32,14 @@
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
 
-  /* =========================
-  Layout
-  ========================= */
   --max: 1180px;
 
-  /* =========================
-  Fonts
-  ========================= */
   --font-display: Georgia, serif;
   --font-body: 'Segoe UI', system-ui, sans-serif;
 }
 
 /* =========================
-Base Reset
+   BASE RESET
 ========================= */
 * {
   box-sizing: border-box;
@@ -62,7 +50,6 @@ html {
   scroll-padding-top: 5.5rem;
 }
 
-/* --- Changed body: flex layout so footer stays at bottom on all screens --- */
 body {
   margin: 0;
   min-height: 100dvh;
@@ -82,55 +69,24 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* --- Make main grow so footer is pushed down --- */
 main {
   flex: 1;
 }
 
 /* =========================
-Dark Theme
+   GLOBAL LINKS (FIXED)
+   NO MORE CLICK UNDERLINE BUG
 ========================= */
-body[data-theme='dark'] {
-  --bg: #171614;
-  --surface: #1c1b19;
-  --surface2: #201f1d;
-  --surface3: #22211f;
-
-  --text: #e4e2de;
-  --muted: #aba8a1;
-  --faint: #7c7973;
-
-  --primary: #4f98a3;
-  --primary2: #68b4bf;
-  --primary3: #1a626b;
-  --primarySoft: #313b3b;
-
-  --border: #393836;
-
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.28);
-  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.35);
-}
-
-/* =========================
-Global Elements
-========================= */
-img {
-  max-width: 100%;
-  display: block;
-}
-
 a {
   color: inherit;
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
+/* ❌ REMOVED GLOBAL HOVER UNDERLINE THAT CAUSED CLICK FLICKER */
+/* a:hover { text-decoration: underline; } */
 
 /* =========================
-Layout Helpers
+   LAYOUT
 ========================= */
 .container {
   width: min(calc(100% - 2rem), var(--max));
@@ -138,27 +94,7 @@ Layout Helpers
 }
 
 /* =========================
-Accessibility
-========================= */
-.skip-link {
-  position: absolute;
-  left: 1rem;
-  top: -3rem;
-
-  background: var(--primary);
-  color: #fff;
-
-  padding: .75rem 1rem;
-  border-radius: var(--radius-md);
-  z-index: 999;
-}
-
-.skip-link:focus {
-  top: 1rem;
-}
-
-/* =========================
-Header / Navigation
+   HEADER
 ========================= */
 .site-header {
   position: sticky;
@@ -178,9 +114,38 @@ Header / Navigation
   gap: 1rem;
 
   padding: 1rem 0;
-  position: relative;
 }
 
+/* =========================
+   NAV LINKS (FIXED STABILITY)
+========================= */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+
+  padding: .55rem .4rem;
+
+  line-height: 1.2;
+
+  text-decoration: none; /* IMPORTANT FIX */
+}
+
+/* Prevent any click/hover underline behavior */
+.nav-links a:hover,
+.nav-links a:active,
+.nav-links a:focus {
+  text-decoration: none;
+}
+
+/* =========================
+   BRAND
+========================= */
 .brand {
   display: flex;
   align-items: center;
@@ -204,14 +169,8 @@ Header / Navigation
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--primary) 18%, transparent);
 }
 
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: .65rem;
-}
-
 /* =========================
-Buttons
+   BUTTONS
 ========================= */
 .btn {
   display: inline-flex;
@@ -230,7 +189,6 @@ Buttons
 
 .btn:hover {
   transform: translateY(-1px);
-  text-decoration: none;
 }
 
 .btn-primary {
@@ -248,178 +206,31 @@ Buttons
   background: var(--surface);
   color: var(--text);
   border-color: color-mix(in oklab, var(--text) 10%, transparent);
-  box-shadow: var(--shadow-sm);
-}
-
-.btn-secondary:hover {
-  background: var(--surface3);
 }
 
 /* =========================
-Typography Components
+   ACCESSIBILITY
 ========================= */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
 
-  padding: .35rem .75rem;
+  background: var(--primary);
+  color: #fff;
 
-  border-radius: 9999px;
-
-  background: color-mix(in oklab, var(--primary) 10%, var(--surface));
-  color: var(--primary);
-
-  font-size: .78rem;
-  font-weight: 800;
-  letter-spacing: .11em;
-  text-transform: uppercase;
+  padding: .75rem 1rem;
+  border-radius: var(--radius-md);
+  z-index: 999;
 }
 
-.muted {
-  color: var(--muted);
+.skip-link:focus {
+  top: 1rem;
 }
 
 /* =========================
-Sections
+   FOOTER FIX
 ========================= */
-.hero,
-.section {
-  padding: clamp(3rem, 6vw, 5rem) 0;
-}
-
-/* =========================
-Grids
-========================= */
-.hero-grid,
-.split {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.hero-grid {
-  grid-template-columns: 1.1fr .9fr;
-  align-items: center;
-}
-
-.split {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-/* =========================
-Cards / Panels
-========================= */
-.card,
-.panel {
-  background: var(--surface);
-  border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
-
-  border-radius: var(--radius-2xl);
-  padding: clamp(1.15rem, 2vw, 1.5rem);
-
-  box-shadow: var(--shadow-sm);
-}
-
-.card h2,
-.panel h1 {
-  font-family: var(--font-display);
-}
-
-/* =========================
-Hero
-========================= */
-.hero h1 {
-  font-size: clamp(3rem, 1rem + 7vw, 5.8rem);
-  max-width: 11ch;
-  margin: .9rem 0 .75rem;
-}
-
-.hero p {
-  font-size: clamp(1.05rem, .95rem + .5vw, 1.25rem);
-  max-width: 56ch;
-}
-
-/* =========================
-Metrics
-========================= */
-.metric {
-  min-width: 10.5rem;
-  padding: 1rem;
-
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
-}
-
-/* =========================
-Forms
-========================= */
-.field {
-  display: grid;
-  gap: .45rem;
-}
-
-.field-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.field input,
-.field select,
-.field textarea {
-  width: 100%;
-  min-height: 48px;
-
-  padding: .85rem 1rem;
-
-  border-radius: 12px;
-  border: 1px solid var(--border);
-
-  background: var(--surface2);
-  color: inherit;
-}
-
-.error-message {
-  min-height: 1rem;
-  color: var(--error);
-  font-size: .85rem;
-}
-
-/* =========================
-Results
-========================= */
-.result {
-  margin-top: 1rem;
-  padding: 1rem;
-
-  border-radius: 14px;
-
-  background: color-mix(in oklab, var(--primary) 9%, var(--surface));
-  border: 1px solid color-mix(in oklab, var(--primary) 18%, transparent);
-}
-
-/* =========================
-Map Placeholder
-========================= */
-.map-card {
-  min-height: 20rem;
-
-  border-radius: var(--radius-2xl);
-
-  background:
-    linear-gradient(120deg, color-mix(in oklab, var(--primary) 18%, transparent), transparent),
-    repeating-linear-gradient(45deg,
-      color-mix(in oklab, var(--text) 5%, transparent),
-      color-mix(in oklab, var(--text) 5%, transparent) 1px,
-      transparent 1px,
-      transparent 20px),
-    var(--surface3);
-}
-
-/* =========================
-Footer
-========================= */
-/* Footer sticks at bottom on all screens, same style */
 .footer {
   padding: 1.5rem 0;
   border-top: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
@@ -428,30 +239,11 @@ Footer
 }
 
 /* =========================
-Animations
-========================= */
-.fade {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity .7s ease, transform .7s ease;
-}
-
-.fade.in {
-  opacity: 1;
-  transform: none;
-}
-
-/* =========================
-Responsive
+   RESPONSIVE
 ========================= */
 @media (max-width: 960px) {
-  .hero-grid,
-  .split {
-    grid-template-columns: 1fr;
-  }
-
-  .field-grid {
-    grid-template-columns: 1fr;
+  .nav-links {
+    gap: 1rem;
   }
 }
 
@@ -462,14 +254,11 @@ Responsive
 }
 
 /* =========================
-Reduced Motion
+   REDUCED MOTION
 ========================= */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  * {
     animation: none !important;
     transition: none !important;
-    scroll-behavior: auto !important;
   }
 }
