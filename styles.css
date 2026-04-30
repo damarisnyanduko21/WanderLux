@@ -217,20 +217,6 @@ Header / Navigation
   align-items: center;
   gap: .65rem;
 }
-/* Hamburger hidden on desktop */
-.hamburger {
-  display: none;
-  font-size: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* MOBILE VIEW */
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
 
 /* =========================
 Buttons
@@ -493,5 +479,52 @@ Reduced Motion
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+}
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #fff;
+  position: relative;
+}
+
+/* Desktop nav */
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+/* Hamburger hidden on desktop */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: white;
+    width: 200px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 10px;
+  }
+
+  .nav.active {
+    display: flex;
   }
 }
