@@ -217,6 +217,20 @@ Header / Navigation
   align-items: center;
   gap: .65rem;
 }
+/* Hamburger hidden on desktop */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
 
 /* =========================
 Buttons
