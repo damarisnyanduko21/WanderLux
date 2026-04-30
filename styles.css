@@ -161,32 +161,51 @@ Accessibility
 Header / Navigation
 ========================= */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-
-  backdrop-filter: blur(14px);
-  background: color-mix(in oklab, var(--bg) 86%, transparent);
-
-  border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
-  overflow:visible;
-}
-
-.nav {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-
-  padding: 1rem 0;
+  align-items: center;
+  padding: 15px 20px;
+  background: #fff;
   position: relative;
 }
-.nav-links {
+
+/* Desktop nav */
+.nav {
   display: flex;
-  gap: 1.25rem;   
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Hamburger hidden on desktop */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: white;
+    width: 200px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 10px;
+  }
+
+  .nav.active {
+    display: flex;
+  }
 }
 .brand {
   display: flex;
@@ -490,41 +509,3 @@ Reduced Motion
   position: relative;
 }
 
-/* Desktop nav */
-.nav {
-  display: flex;
-  gap: 20px;
-}
-
-/* Hamburger hidden on desktop */
-.hamburger {
-  display: none;
-  font-size: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* MOBILE VIEW */
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  .nav {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background: white;
-    width: 200px;
-    padding: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    border-radius: 10px;
-  }
-
-  .nav.active {
-    display: flex;
-  }
-}
