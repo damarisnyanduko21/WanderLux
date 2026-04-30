@@ -173,12 +173,13 @@ Header / Navigation
 }
 
 .nav {
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  align-items:center;
-  gap:1rem;
-  padding:1rem 0;
-  position:relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 1rem 0;
+  position: relative;
 }
 
 .brand {
@@ -206,21 +207,9 @@ Header / Navigation
 
 /* Navigation */
 .nav-actions {
-  display:flex;
-  align-items:center;
-  gap:.65rem;
-  flex-shrink:0;
-  justify-self:end;
-}
-
-.nav-links {
-  display:flex;
-  flex-wrap:wrap;
-  gap:1rem;
-  font-size:.95rem;
-  align-items:center;
-  justify-content:center;
-  letter-spacing:-0.01em;
+  display: flex;
+  align-items: center;
+  gap: .65rem;
 }
 
 /* =========================
