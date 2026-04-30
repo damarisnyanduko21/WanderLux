@@ -11,6 +11,7 @@
           content="WanderLux Travel Agency offers personalised travel planning, guided tours, custom packages, and trip cost estimates.">
 
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 
 <body>
@@ -157,8 +158,9 @@
                 </div>
 
                 <!-- Map Placeholder -->
-                <div class="map-card fade"
-                     aria-label="Map placeholder">
+                <div id="map"
+                     class="map-card fade"
+                     aria-label="Interactive map">
                 </div>
 
             </div>
@@ -174,6 +176,23 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Create map centered on Sydney International Airport
+    const map = L.map('map').setView([-33.9399, 151.1753], 12);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add marker
+    L.marker([-33.9399, 151.1753])
+        .addTo(map)
+        .bindPopup('Sydney International Airport (SYD), Australia')
+        .openPopup();
+</script>
 
 </body>
 </html>
