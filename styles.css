@@ -180,11 +180,6 @@ Header / Navigation
   padding: 1rem 0;
   position: relative;
 }
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-}
 
 .brand {
   display: flex;
