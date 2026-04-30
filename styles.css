@@ -169,6 +169,7 @@ Header / Navigation
   background: color-mix(in oklab, var(--bg) 86%, transparent);
 
   border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+  overflow:visible;
 }
 
 .nav {
