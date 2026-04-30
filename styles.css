@@ -1,86 +1,85 @@
 /* =========================
-HEADER IMPROVEMENTS
+UI ENHANCEMENTS (NON-BREAKING)
 ========================= */
 
-/* Better spacing + alignment */
-.nav {
-  padding: 1.1rem 0;
+/* Better section spacing */
+.section {
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
 }
 
-/* Brand refinement */
-.brand {
-  letter-spacing: 0.3px;
-}
-
-/* Logo icon polish */
-.brand-mark {
+/* Card & panel hover polish */
+.card,
+.panel {
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
-.brand:hover .brand-mark {
-  transform: rotate(-6deg) scale(1.05);
-  box-shadow: var(--shadow-sm);
+.card:hover,
+.panel:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
-/* Navigation links styling */
-.menu a {
-  position: relative;
-  font-weight: 500;
-  padding: .4rem 0;
+/* Improved form focus states */
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 20%, transparent);
 }
 
-/* Underline hover animation */
-.menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 2px;
-  background: var(--primary);
-  transition: width .25s ease;
+/* Smoother button interaction */
+.btn {
+  transition: all .2s ease;
 }
 
-.menu a:hover::after {
-  width: 100%;
+.btn:active {
+  transform: scale(0.97);
 }
 
-/* Active link style (optional class: .active) */
-.menu a.active {
+/* Premium header glass effect */
+.site-header {
+  backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* Better grid spacing */
+.hero-grid,
+.split {
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* Link hover improvement */
+a {
+  transition: color .2s ease;
+}
+
+a:hover {
   color: var(--primary);
 }
 
-/* Header subtle shadow when scrolling (optional JS trigger) */
-.site-header.scrolled {
+/* Map polish */
+.map-card {
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
-  border-bottom: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
 }
 
-/* =========================
-MOBILE HEADER POLISH
-========================= */
-@media (max-width: 768px) {
+/* Improved fade animation */
+.fade {
+  transform: translateY(20px);
+}
 
-  /* Space out header */
-  .nav {
-    padding: .9rem 0;
+.fade.in {
+  transform: translateY(0);
+}
+
+/* Mobile spacing improvements */
+@media (max-width: 640px) {
+  .section {
+    padding: 2.5rem 0;
   }
 
-  /* Make hamburger cleaner */
-  .hamburger {
-    font-size: 26px;
-    border-radius: var(--radius-md);
-    padding: .4rem .6rem;
-    transition: background .2s ease;
-  }
-
-  .hamburger:hover {
-    background: var(--surface3);
-  }
-
-  /* Improve mobile menu links */
-  .menu a {
-    font-size: 1.05rem;
-    padding: .6rem 0;
+  .card,
+  .panel {
+    padding: 1rem;
   }
 }
