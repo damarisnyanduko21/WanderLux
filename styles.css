@@ -1,5 +1,5 @@
 /* =========================
-   ROOT VARIABLES (SAFE)
+   VARIABLES (RESTORED FULL DESIGN)
 ========================= */
 :root {
   --bg: #f7f6f2;
@@ -9,36 +9,54 @@
 
   --text: #28251d;
   --muted: #6f6d68;
+  --faint: #9a9893;
 
   --primary: #01696f;
+  --primary2: #0c4e54;
+  --primary3: #0f3638;
+  --primarySoft: #cedcd8;
+
+  --success: #437a22;
+  --error: #a12c7b;
 
   --border: #d4d1ca;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 10px 28px rgba(0,0,0,.09);
+  --shadow-lg: 0 20px 48px rgba(0,0,0,.14);
+
+  --radius-2xl: 1.5rem;
+  --max: 1180px;
+
+  --font-display: Georgia, serif;
+  --font-body: 'Segoe UI', system-ui, sans-serif;
 }
 
 /* =========================
-   GLOBAL RESET
+   BASE
 ========================= */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
 
-  font-family: system-ui, sans-serif;
-
+  font-family: var(--font-body);
   color: var(--text);
-  background: var(--bg);
+
+  background:
+    radial-gradient(circle at top right, rgba(1,105,111,.08), transparent 28%),
+    var(--bg);
 }
 
 /* =========================
-   DARK MODE (SAFE)
+   DARK MODE (RESTORED)
 ========================= */
-body[data-theme="dark"] {
+body[data-theme='dark'] {
   --bg: #171614;
   --surface: #1c1b19;
   --surface2: #201f1d;
+  --surface3: #22211f;
 
   --text: #e4e2de;
   --muted: #aba8a1;
@@ -49,10 +67,16 @@ body[data-theme="dark"] {
 }
 
 /* =========================
-   LINKS (NO BUGS)
+   LINKS (FIX ONLY BUG)
 ========================= */
 a {
   color: inherit;
+  text-decoration: none;
+}
+
+.nav-links a:hover,
+.nav-links a:active,
+.nav-links a:focus {
   text-decoration: none;
 }
 
@@ -62,22 +86,23 @@ a {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 20;
 
-  background: color-mix(in oklab, var(--bg) 90%, transparent);
-  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  background: color-mix(in oklab, var(--bg) 86%, transparent);
+
+  border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
 }
 
 .nav {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
-  padding: 1rem;
+  align-items: center;
+  padding: 1rem 0;
 }
 
 /* =========================
-   NAV LINKS (SAFE + STABLE)
+   NAV LINKS (RESTORED)
 ========================= */
 .nav-links {
   display: flex;
@@ -85,29 +110,33 @@ a {
 }
 
 .nav-links a {
-  padding: .5rem;
   display: inline-flex;
   align-items: center;
+  padding: .5rem .4rem;
 }
 
 /* =========================
-   MOBILE MENU (WORKING)
+   MOBILE MENU (FIXED PROPERLY)
 ========================= */
 @media (max-width: 960px) {
   .nav-links {
     display: none;
-    flex-direction: column;
 
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
 
-    background: var(--surface);
+    flex-direction: column;
+    gap: .75rem;
+
     padding: 1rem;
+    background: var(--surface);
 
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 1rem;
+
+    box-shadow: var(--shadow-lg);
   }
 
   .nav-links.open {
@@ -116,11 +145,32 @@ a {
 }
 
 /* =========================
-   FOOTER (SAFE)
+   MAP (RESTORED - THIS WAS LOST BEFORE)
+========================= */
+.map-card {
+  min-height: 20rem;
+
+  border-radius: var(--radius-2xl);
+
+  background:
+    linear-gradient(120deg,
+      color-mix(in oklab, var(--primary) 18%, transparent),
+      transparent),
+    repeating-linear-gradient(45deg,
+      color-mix(in oklab, var(--text) 5%, transparent),
+      color-mix(in oklab, var(--text) 5%, transparent) 1px,
+      transparent 1px,
+      transparent 20px),
+    var(--surface3);
+
+  border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
+}
+
+/* =========================
+   FOOTER (RESTORED)
 ========================= */
 .footer {
-  margin-top: auto;
-  padding: 1.5rem;
-  border-top: 1px solid var(--border);
+  padding: 1.5rem 0;
+  border-top: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
   color: var(--muted);
 }
