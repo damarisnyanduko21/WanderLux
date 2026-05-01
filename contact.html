@@ -7,6 +7,9 @@
     <meta name="description" content="WanderLux Travel Agency offers personalised travel planning, guided tours, custom packages, and trip cost estimates.">
     
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 
 <body>
@@ -46,14 +49,13 @@
         </div>
     </header>
 
-
     <!-- Main Content -->
     <main id="main">
 
         <section class="section">
             <div class="container grid split">
 
-                <!-- Contact Info + Form -->
+                <!-- Contact Form -->
                 <div class="panel fade">
 
                     <span class="eyebrow">Contact Us</span>
@@ -61,24 +63,21 @@
 
                     <p class="muted">
                         Collins Street, Melbourne VIC 3000, Australia<br>
-                        Phone:+61 434 763 617<br>
-                        Email:info@wanderluxtravel.com
+                        Phone: +61 434 763 617<br>
+                        Email: info@wanderluxtravel.com
                     </p>
 
                     <span class="eyebrow">Share your enquiry</span>
 
-                    <!-- Contact Form -->
                     <form id="contact-form"
                           method="POST"
                           action="https://formspree.io/f/mojraqbz"
                           novalidate>
 
-                        <!-- Hidden fields -->
                         <input type="hidden" name="_subject" value="WanderLux General Enquiry">
                         <input type="hidden" name="_next" value="https://damarisnyanduko21.github.io/WanderLux/contact.html">
                         <input type="text" name="_gotcha" style="display:none">
 
-                        <!-- Name + Email -->
                         <div class="field-grid">
 
                             <div class="field">
@@ -87,9 +86,7 @@
                                        name="name"
                                        data-error-key="contact-name"
                                        required>
-
-                                <span class="error-message"
-                                      data-error-key="contact-name"></span>
+                                <span class="error-message" data-error-key="contact-name"></span>
                             </div>
 
                             <div class="field">
@@ -99,43 +96,32 @@
                                        type="email"
                                        data-error-key="contact-email"
                                        required>
-
-                                <span class="error-message"
-                                      data-error-key="contact-email"></span>
+                                <span class="error-message" data-error-key="contact-email"></span>
                             </div>
 
                         </div>
 
-                        <!-- Message -->
                         <div class="field">
                             <label for="contact-message">Message</label>
                             <textarea id="contact-message"
                                       name="message"
                                       data-error-key="contact-message"
                                       required></textarea>
-
-                            <span class="error-message"
-                                  data-error-key="contact-message"></span>
+                            <span class="error-message" data-error-key="contact-message"></span>
                         </div>
 
-                        <!-- Submit -->
                         <button class="btn btn-primary" type="submit">
                             Send enquiry
                         </button>
 
-                        <p id="contact-status"
-                           class="muted"
-                           aria-live="polite"></p>
+                        <p id="contact-status" class="muted" aria-live="polite"></p>
 
                     </form>
 
                 </div>
 
-                <!-- Map Placeholder -->
-                <div id="map"
-                     class="map-card fade"
-                     aria-label="Interactive map">
-                </div>
+                <!-- Map -->
+                <div id="map" class="map-card fade"></div>
 
             </div>
         </section>
@@ -149,23 +135,39 @@
         </div>
     </footer>
 
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Your script -->
     <script src="script.js"></script>
-   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script>
-    // Collins Street, Melbourne
-    const map = L.map('map').setView([-37.8136, 144.9631], 13);
+    <!-- Map Script -->
+    <script>
+        // Collins Street, Melbourne VIC 3000
+        const coords = [-37.8136, 144.9631];
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+        const map = L.map('map', {
+            scrollWheelZoom: false
+        }).setView(coords, 16);
 
-    L.marker([-37.8136, 144.9631])
-        .addTo(map)
-        .bindPopup('Collins Street, Melbourne CBD')
-        .openPopup();
-</script>
-</script>
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker(coords)
+            .addTo(map)
+            .bindPopup('Collins Street, Melbourne CBD')
+            .openPopup();
+
+        // Fix rendering inside grid/flex layout
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 200);
+
+        window.addEventListener('resize', () => {
+            map.invalidateSize();
+        });
+    </script>
 
 </body>
 </html>
