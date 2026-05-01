@@ -181,13 +181,6 @@ Header / Navigation
   padding: 1rem 0;
   position: relative;
 }
-.nav-links {
-  display: flex;
-  gap: 1.25rem;   
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
 .brand {
   display: flex;
   align-items: center;
