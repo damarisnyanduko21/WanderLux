@@ -107,11 +107,16 @@ const setErr = (form, key, msg) => {
     if (t) t.textContent = msg;
 };
 
-const validate = (form, status) => {
-    form.addEventListener('submit', e => {
+const validateForm = (form, statusEl, successMessage) => {
+    form.addEventListener('submit', (e) => {
+        const action = form.getAttribute('action') || '';
+
+        // Allow Formspree external handling
+        if (action.includes('formspree.io')) return;
+
         e.preventDefault();
 
-        let ok = true;
+        let isValid = true;
 
         // Clear errors
         form.querySelectorAll('[data-error-key]')
