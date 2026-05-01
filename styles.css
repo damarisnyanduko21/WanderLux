@@ -169,7 +169,6 @@ Header / Navigation
   background: color-mix(in oklab, var(--bg) 86%, transparent);
 
   border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
-  overflow:visible;
 }
 
 .nav {
@@ -181,6 +180,7 @@ Header / Navigation
   padding: 1rem 0;
   position: relative;
 }
+
 .brand {
   display: flex;
   align-items: center;
@@ -204,7 +204,6 @@ Header / Navigation
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--primary) 18%, transparent);
 }
 
-/* Navigation */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -473,12 +472,4 @@ Reduced Motion
     transition: none !important;
     scroll-behavior: auto !important;
   }
-}
-.site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  background: #fff;
-  position: relative;
 }
