@@ -109,6 +109,8 @@ const setErr = (form, key, msg) => {
 
 const validate = (form, status) => {
     form.addEventListener('submit', e => {
+        // Allow Formspree external handling
+        if (action.includes('formspree.io')) return;
         e.preventDefault();
 
         let ok = true;
