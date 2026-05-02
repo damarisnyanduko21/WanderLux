@@ -3,8 +3,9 @@ const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
 
+
 // =========================
-// Fade-in animation
+// Fade‑in animation
 // =========================
 const observer = new IntersectionObserver((entries, o) => {
     entries.forEach(e => {
@@ -16,6 +17,7 @@ const observer = new IntersectionObserver((entries, o) => {
 }, { threshold: 0.18 });
 
 $$('.fade').forEach(el => observer.observe(el));
+
 
 
 // =========================
@@ -39,6 +41,7 @@ if (banner) {
 }
 
 
+
 // =========================
 // Mobile navigation toggle
 // =========================
@@ -58,6 +61,7 @@ if (navBtn && nav) {
         });
     });
 }
+
 
 
 // =========================
@@ -99,8 +103,9 @@ if (themeBtn) {
 }
 
 
+
 // =========================
-// Form validation helpers
+// Form validation helper
 // =========================
 const setErr = (form, key, msg) => {
     const t = form.querySelector(`[data-error-key="${key}"]`);
@@ -108,18 +113,16 @@ const setErr = (form, key, msg) => {
 };
 
 const validate = (form, status) => {
-    form.addEventListener('submit', e => {
-        // Allow Formspree external handling
-        if (action.includes('formspree.io')) return;
-        e.preventDefault();
+    form.addEventListener('submit', (e) => {
+        const action = form.getAttribute('action') || '';
+        const isFormspree = action.includes('formspree.io');
 
         let ok = true;
 
-        // Clear errors
-        form.querySelectorAll('[data-error-key]')
-            .forEach(x => x.textContent = '');
+        form.querySelectorAll('[data-error-key]').forEach(
+            x => (x.textContent = '')
+        );
 
-        // Validate fields
         form.querySelectorAll('[required]').forEach(el => {
             const key = el.dataset.errorKey || el.id;
             const v = el.value.trim();
@@ -139,15 +142,48 @@ const validate = (form, status) => {
             }
         });
 
-        if (status) {
-            status.textContent = ok
-                ? 'Form ready for email integration.'
-                : 'Please fix the highlighted fields.';
+        if (!ok) {
+            e.preventDefault();
+            if (status) status.textContent = 'Please fix the highlighted fields.';
+            return;
         }
 
-        if (ok) form.reset();
+        if (isFormspree) {
+            if (status) status.textContent = 'Sending your message...';
+
+            const body = new FormData(form);
+            fetch(action, {
+                method: 'POST',
+                body,
+                headers: {
+                    Accept: 'application/json'
+                }
+            })
+                .then(res => {
+                    if (res.ok) {
+                        if (status) status.textContent = 'Message sent! Thank you.';
+                        form.reset();
+                    } else {
+                        res.json().then(data => {
+                            if (status) status.textContent =
+                                'Error: ' + (data?.error || 'Something went wrong.');
+                        });
+                    }
+                })
+                .catch(err => {
+                    if (status) status.textContent = 'Network error. Please try again.';
+                    console.error('Formspree submit error:', err);
+                });
+
+            return;
+        }
+
+        e.preventDefault();
+        if (status) status.textContent = 'Form ready for email integration.';
+        form.reset();
     });
 };
+
 
 
 // =========================
@@ -229,8 +265,9 @@ if (calc) {
 }
 
 
+
 // =========================
-// Forms hookup
+// Formspree forms (appointment + contact)
 // =========================
 const app = $('#appointment-form');
 if (app) validate(app, $('#appointment-status'));
