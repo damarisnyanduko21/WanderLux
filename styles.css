@@ -24,7 +24,7 @@
     --radius-sm:.375rem;
     --radius-md:.5rem;
     --radius-lg:.75rem;
-    --radius-xl:1rem;
+    --radius-xl:.8rem;
     --radius-2xl:1.5rem;
     --radius-full:9999px;
 
@@ -50,7 +50,9 @@ body {
     font-size:clamp(1rem,.95rem + .25vw,1.06rem);
     line-height:1.65;
     color:var(--text);
-    background:radial-gradient(circle at top right, rgba(1,105,111,.08), transparent 28%),var(--bg);
+    background:
+        radial-gradient(circle at top right, rgba(1,105,111,.08), transparent 28%),
+        var(--bg);
     -webkit-font-smoothing:antialiased;
 }
 
@@ -87,7 +89,7 @@ a {
 }
 
 a:hover {
-    text-decoration:underline;
+    text-decoration:none;
 }
 
 .container {
@@ -328,25 +330,41 @@ a:hover {
     min-height:34rem;
     overflow:hidden;
     border-radius:1.7rem;
-    background:linear-gradient(135deg,#0f3f46,#1b5960 45%,#c8a26f);
+    background:
+        linear-gradient(135deg, rgba(6,73,83,.18), rgba(10,143,160,.12) 42%, rgba(255,122,89,.08)),
+        url('images/hero-beach.jpg') center/cover no-repeat;
+    background-blend-mode:multiply;
     box-shadow:var(--shadow-lg);
 }
 
 .banner::before {
     content:'';
     position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,.06), transparent 18%),
+        linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.08));
+    pointer-events:none;
+}
+
+.banner::after {
+    content:'';
+    position:absolute;
     inset:1rem;
     border-radius:1.45rem;
-    border:1px solid rgba(255,255,255,.24);
+    border:1px solid rgba(255,255,255,.10);
+    pointer-events:none;
 }
 
 .banner-badge,
 .banner-note {
     position:absolute;
-    background:color-mix(in oklab, var(--surface) 84%, transparent);
+    background:rgba(255,255,255,.12);
+    color:#fff;
     backdrop-filter:blur(14px);
-    border:1px solid color-mix(in oklab, var(--text) 8%, transparent);
+    border:1px solid rgba(255,255,255,.12);
     box-shadow:var(--shadow-md);
+    z-index:1;
 }
 
 .banner-badge {
@@ -581,20 +599,20 @@ a:hover {
 }
 
 html, body {
-  height: 100%;
-  margin: 0;
+    height:100%;
+    margin:0;
 }
 
 body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
 }
 
 main {
-  flex: 1;
+    flex:1;
 }
 
 footer {
-  margin-top: auto;
+    margin-top:auto;
 }
