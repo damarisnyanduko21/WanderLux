@@ -147,12 +147,12 @@ const validateForm = (form, statusEl, successMessage) => {
 
 
 
-// =========================
-// Trip calculator
-// =========================
-const calc = $('#calculator-form');
+/* =========================
+   Calculator Logic
+========================= */
+const calculator = $('#calculator-form');
 
-if (calc) {
+if (calculator) {
     const rates = {
         Bali: { base: 180, accommodation: 95 },
         Kyoto: { base: 240, accommodation: 140 },
@@ -161,69 +161,72 @@ if (calc) {
         'Cape Town': { base: 210, accommodation: 120 }
     };
 
-    const mult = {
+    const multipliers = {
         Budget: 0.85,
         Standard: 1,
         Luxury: 1.45
     };
 
-    const note = {
+    const labels = {
         Budget: 'Budget Travel Package',
         Standard: 'Standard Travel Package',
         Luxury: 'Luxury Travel Package'
     };
 
-    calc.addEventListener('submit', e => {
+    calculator.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // Clear errors
-        ['destination', 'travellers', 'days', 'style']
-            .forEach(k => setErr(calc, k, ''));
+        ['destination', 'travellers', 'days', 'style'].forEach((k) =>
+            setError(calculator, k, '')
+        );
 
-        const d = calc.destination.value;
-        const t = Number(calc.travellers.value);
-        const days = Number(calc.days.value);
-        const s = calc.style.value;
+        const destination = calculator.destination.value;
+        const travellers = Number(calculator.travellers.value);
+        const days = Number(calculator.days.value);
+        const style = calculator.style.value;
 
-        let ok = true;
+        let valid = true;
 
-        if (!d) {
-            setErr(calc, 'destination', 'Choose a destination.');
-            ok = false;
+        if (!destination) {
+            setError(calculator, 'destination', 'Choose a destination.');
+            valid = false;
         }
 
-        if (!t || t < 1) {
-            setErr(calc, 'travellers', 'Enter at least 1 traveller.');
-            ok = false;
+        if (!travellers || travellers < 1) {
+            setError(calculator, 'travellers', 'Enter at least 1 traveller.');
+            valid = false;
         }
 
         if (!days || days < 1) {
-            setErr(calc, 'days', 'Enter at least 1 day.');
-            ok = false;
+            setError(calculator, 'days', 'Enter at least 1 day.');
+            valid = false;
         }
 
-        if (!s) {
-            setErr(calc, 'style', 'Choose a style.');
-            ok = false;
+        if (!style) {
+            setError(calculator, 'style', 'Choose a style.');
+            valid = false;
         }
 
-        if (!ok) return;
+        if (!valid) return;
 
-        const total = Math.round(
-            ((rates[d].base * t * days) +
-            (rates[d].accommodation * days)) * mult[s]
-        );
+        const total =
+            (rates[destination].base * travellers * days +
+                rates[destination].accommodation * days) *
+            multipliers[style];
+
+        const formatted = Math.round(total).toLocaleString();
 
         $('#calculator-result').innerHTML = `
-            <strong>Estimated total: $${total.toLocaleString()}</strong>
+            <strong>Estimated total: $${formatted}</strong>
             <p>
-                Estimated cost for ${t} traveller${t > 1 ? 's' : ''} 
-                to ${d} for ${days} day${days > 1 ? 's' : ''}: 
-                $${total.toLocaleString()} - ${note[s]}.
+                Estimated cost for ${travellers} traveller${travellers > 1 ? 's' : ''} to
+                ${destination} for ${days} day${days > 1 ? 's' : ''}:
+                $${formatted} - ${labels[style]}.
             </p>
         `;
     });
 }
+
 
 
 // =========================
