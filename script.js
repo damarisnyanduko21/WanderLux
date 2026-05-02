@@ -100,51 +100,52 @@ if (themeBtn) {
 
 
 // =========================
-/* =========================
-   Form Validation Engine
-========================= */
-const validateForm = (form, statusEl, successMessage) => {
-    form.addEventListener('submit', (e) => {
-        const action = form.getAttribute('action') || '';
+// Form validation helpers
+// =========================
+const setErr = (form, key, msg) => {
+    const t = form.querySelector(`[data-error-key="${key}"]`);
+    if (t) t.textContent = msg;
+};
 
-        // Allow Formspree external handling
-        if (action.includes('formspree.io')) return;
-
+const validate = (form, status) => {
+    form.addEventListener('submit', e => {
         e.preventDefault();
 
-        let isValid = true;
+        let ok = true;
 
-        // clear old errors
-        form.querySelectorAll('[data-error-key]').forEach(el => el.textContent = '');
+        // Clear errors
+        form.querySelectorAll('[data-error-key]')
+            .forEach(x => x.textContent = '');
 
-        // validate required fields
-        form.querySelectorAll('[required]').forEach((field) => {
-            const key = field.dataset.errorKey || field.id;
-            const value = field.value.trim();
+        // Validate fields
+        form.querySelectorAll('[required]').forEach(el => {
+            const key = el.dataset.errorKey || el.id;
+            const v = el.value.trim();
 
-            if (!value) {
-                setError(form, key, 'This field is required.');
-                isValid = false;
+            if (!v) {
+                setErr(form, key, 'This field is required.');
+                ok = false;
             }
 
-            if (field.type === 'email' && value) {
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(value)) {
-                    setError(form, key, 'Enter a valid email address.');
-                    isValid = false;
-                }
+            if (
+                el.type === 'email' &&
+                v &&
+                !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+            ) {
+                setErr(form, key, 'Enter a valid email address.');
+                ok = false;
             }
         });
 
-        if (!isValid) {
-            if (statusEl) statusEl.textContent = 'Please fix the highlighted fields.';
-            return;
+        if (status) {
+            status.textContent = ok
+                ? 'Form ready for email integration.'
+                : 'Please fix the highlighted fields.';
         }
 
-        if (statusEl) statusEl.textContent = successMessage;
+        if (ok) form.reset();
     });
 };
-
 
 
 // =========================
@@ -224,8 +225,6 @@ if (calc) {
         `;
     });
 }
-
-
 
 
 // =========================
